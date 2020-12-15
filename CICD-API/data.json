@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Name": "The Witcher 1",
+    "Genre": "RPG"
+  },
+  {
+    "Id": 2,
+    "Name": "Evil Within",
+    "Genre": "Action"
+  },
+  {
+    "Id": 3,
+    "Name": "Silent Hill",
+    "Genre": "RPG"
+  },
+  {
+    "Id": 4,
+    "Name": "Dofus",
+    "Genre": "MMORPG"
+  }
+]

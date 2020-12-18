@@ -11,7 +11,7 @@
 # https://gitlab.com/tobiaskoch/gitlab-ci-example-dotnetcore
 
 # see https://hub.docker.com/r/microsoft/dotnet/
-image: mcr.microsoft.com/dotnet/core/sdk:3.1
+image: mcr.microsoft.com/dotnet/core/sdk:5.0
 
 
 

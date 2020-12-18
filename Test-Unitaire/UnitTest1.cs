@@ -14,16 +14,21 @@ namespace Test_Unitaire
         public void IndexTest()
         {
             GamesController Gc = new GamesController();
-            Assert.IsNotNull(Gc.Index());
+
+            var result = Gc.Index();
+            
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+            
+            // Assert.IsNotNull(Gc.Index());
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void CreateTest()
         {
             GamesController Gc = new GamesController();
             var Game = new Game();
             var result = Gc.Create(Game);
-            Assert.IsInstanceOfType(result,typeof(ActionResult<IEnumerable<GamesController>>));
-        }*/
+            Assert.IsInstanceOfType(result,typeof(OkObjectResult));
+        }
     }
 }

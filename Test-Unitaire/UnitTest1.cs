@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CICD_API.Controller;
-using CICD_API;
 using CICD_API.Entity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +12,7 @@ namespace Test_Unitaire
         public void IndexTest()
         {
             GamesController Gc = new GamesController();
-
             var result = Gc.Index();
-            
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
 

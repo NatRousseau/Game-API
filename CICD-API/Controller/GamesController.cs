@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using CICD_API.Entity;
+using CICD_API.Models;
 using Newtonsoft.Json;
 
 namespace CICD_API.Controller
@@ -35,7 +35,7 @@ namespace CICD_API.Controller
             string json = System.IO.File.ReadAllText("data.json");
             List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
             Game myGame = games.FirstOrDefault(G => G.Id == game.Id);
-            myGame.Name = game.Name;
+            myGame.Titre = game.Titre;
             myGame.Genre = game.Genre;
             string jsonEdit = JsonConvert.SerializeObject(games, Formatting.Indented);
             System.IO.File.WriteAllText("data.json", jsonEdit);

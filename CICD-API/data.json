@@ -1,22 +1,22 @@
 [
   {
     "Id": 1,
-    "Name": "The Witcher 1",
+    "Titre": "The Witcher 1",
     "Genre": "RPG"
   },
   {
     "Id": 2,
-    "Name": "Evil Within",
+    "Titre": "Evil Within",
     "Genre": "Action"
   },
   {
     "Id": 3,
-    "Name": "Silent Hill",
+    "Titre": "Silent Hill",
     "Genre": "RPG"
   },
   {
     "Id": 4,
-    "Name": "Dofus",
+    "Titre": "Dofus",
     "Genre": "MMORPG"
   }
 ]

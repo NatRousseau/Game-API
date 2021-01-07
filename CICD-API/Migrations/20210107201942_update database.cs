@@ -2,7 +2,7 @@
 
 namespace CICD_API.Migrations
 {
-    public partial class UpdateCollectionDBUserDB : Migration
+    public partial class updatedatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,12 +55,12 @@ namespace CICD_API.Migrations
                 name: "GameCollection",
                 columns: table => new
                 {
-                    GameIdd = table.Column<int>(type: "int", nullable: false),
+                    GameId = table.Column<int>(type: "int", nullable: false),
                     CollectionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameCollection", x => new { x.GameIdd, x.CollectionId });
+                    table.PrimaryKey("PK_GameCollection", x => new { x.GameId, x.CollectionId });
                     table.ForeignKey(
                         name: "FK_GameCollection_Collection_CollectionId",
                         column: x => x.CollectionId,
@@ -68,8 +68,8 @@ namespace CICD_API.Migrations
                         principalColumn: "CollectionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameCollection_Game_GameIdd",
-                        column: x => x.GameIdd,
+                        name: "FK_GameCollection_Game_GameId",
+                        column: x => x.GameId,
                         principalTable: "Game",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

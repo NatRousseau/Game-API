@@ -20,11 +20,11 @@ namespace CICD_API.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GameCollection>()
-                .HasKey(gc => new { gc.GameIdd, gc.CollectionId });  
+                .HasKey(gc => new { gc.GameId, gc.CollectionId });  
             modelBuilder.Entity<GameCollection>()
                 .HasOne(gc => gc.Game)
                 .WithMany(g => g.GameCollection)
-                .HasForeignKey(gc => gc.GameIdd);  
+                .HasForeignKey(gc => gc.GameId);  
             modelBuilder.Entity<GameCollection>()
                 .HasOne(gc => gc.Collection)
                 .WithMany(c => c.GameCollection)

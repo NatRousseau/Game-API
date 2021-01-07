@@ -1,19 +1,18 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using CICD_API.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-
 
 namespace CICD_API.Controller
 {
-    public class CollectionsController
+    // [Authorize]
+    [Route("api/[controller]")]
+    public class CollectionsController : Microsoft.AspNetCore.Mvc.Controller
     {
-        [Authorize]
-        [Route("api/[controller]")]
-    public class GamesController : ControllerBase
-    {
-        public GamesController(Micro_API_DBContext DbContext)
+        public CollectionsController(Micro_API_DBContext DbContext)
         {
             Database = DbContext;
         }
@@ -22,49 +21,39 @@ namespace CICD_API.Controller
         
         // GET
         [HttpGet]
-        public IActionResult Index()
+        public async Task<List<Models.Collection>> Index()
         {
-           string json =  System.IO.File.ReadAllText("data.json");
-           List<Game> games =  JsonConvert.DeserializeObject<List<Game>>(json);
-           return (new JsonResult(games));
+            return await Database.Collections.ToListAsync();
         }
-        // // POST
-        // [HttpPost]
-        // public IActionResult Create([FromBody]Game game)
-        // {
-        //     string json = System.IO.File.ReadAllText("data.json");
-        //     List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
-        //     games.Add(game);
-        //     string jsonEdit = JsonConvert.SerializeObject(games, Formatting.Indented);
-        //     System.IO.File.WriteAllText("data.json", jsonEdit);
-        //     return Ok("Le jeu à bien été crée");
-        // }
-        // //Put
-        // [HttpPut]
-        // public IActionResult Edit([FromBody] Game game)
-        // {
-        //     string json = System.IO.File.ReadAllText("data.json");
-        //     List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
-        //     Game myGame = games.FirstOrDefault(G => G.Id == game.Id);
-        //     myGame.Name = game.Name;
-        //     myGame.Genre = game.Genre;
-        //     string jsonEdit = JsonConvert.SerializeObject(games, Formatting.Indented);
-        //     System.IO.File.WriteAllText("data.json", jsonEdit);
-        //     return Ok("Le jeu à bien été modifié");
-        // }
-        // //DELETE
-        // [HttpDelete]
-        // public IActionResult Delete([FromBody] Game game)
-        // {
-        //     string json = System.IO.File.ReadAllText("data.json");
-        //     List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
-        //     Game myGame = games.FirstOrDefault(G => G.Id == game.Id);
-        //     games.Remove(myGame);
-        //     string jsonEdit = JsonConvert.SerializeObject(games, Formatting.Indented);
-        //     System.IO.File.WriteAllText("data.json", jsonEdit);
-        //     return Ok("Le jeu à été supprimé");
-        // }
+        
+        // POST
+        [HttpPost]
+        public async Task<List<Models.Collection>> Create([FromBody] Collection collectionData)
+        {
+            // CICD_API.Models.Collection dbCollection = new CICD_API.Models.Collection
+            // {
+            //     CollectionName = Name,
+            //     IdUser = User
+            // };
+            Database.Collections.Add(collectionData);
+            Database.SaveChanges();
+            return await Database.Collections.ToListAsync();
+        }
+        //Put
+        [HttpPut]
+        public async Task<List<Models.Collection>> Edit([FromBody] Collection collectionData)
+        {
+            Database.Collections.Update(collectionData);
+            Database.SaveChanges();
+            return await Database.Collections.ToListAsync();
+        }
+        //DELETE
+        [HttpDelete]
+        public async Task<List<Models.Collection>> Delete([FromBody] Collection collectionData)
+        {
+            Database.Collections.Remove(collectionData);
+            Database.SaveChanges();
+            return await Database.Collections.ToListAsync();
+        }
     }
-
-    }
-}*/
+}

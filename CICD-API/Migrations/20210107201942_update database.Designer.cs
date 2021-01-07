@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CICD_API.Migrations
 {
     [DbContext(typeof(Micro_API_DBContext))]
-    [Migration("20210107150338_Update CollectionDB + UserDB")]
-    partial class UpdateCollectionDBUserDB
+    [Migration("20210107201942_update database")]
+    partial class updatedatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,33 +19,6 @@ namespace CICD_API.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
-
-            modelBuilder.Entity("CICD_API.Entity.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
 
             modelBuilder.Entity("CICD_API.Models.Collection", b =>
                 {
@@ -85,17 +58,44 @@ namespace CICD_API.Migrations
 
             modelBuilder.Entity("CICD_API.Models.GameCollection", b =>
                 {
-                    b.Property<int>("GameIdd")
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<int>("CollectionId")
                         .HasColumnType("int");
 
-                    b.HasKey("GameIdd", "CollectionId");
+                    b.HasKey("GameId", "CollectionId");
 
                     b.HasIndex("CollectionId");
 
                     b.ToTable("GameCollection");
+                });
+
+            modelBuilder.Entity("CICD_API.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("CICD_API.Models.GameCollection", b =>
@@ -108,7 +108,7 @@ namespace CICD_API.Migrations
 
                     b.HasOne("CICD_API.Models.Game", "Game")
                         .WithMany("GameCollection")
-                        .HasForeignKey("GameIdd")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CICD_API.Models;
 using IGDB;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Game = IGDB.Models.Game;
 
 namespace CICD_API.Controller
 {
     [Route("api/[controller]")]
-    public class GamesController : ControllerBase
+    public class GamesController : Microsoft.AspNetCore.Mvc.Controller
     {
         public GamesController(Micro_API_DBContext DbContext)
         {
@@ -18,7 +21,7 @@ namespace CICD_API.Controller
         
         // GET
         [HttpGet]
-        public IActionResult Index()
+        public async Task<List<Models.Game>> Index()
         {
             Database.Games.RemoveRange(Database.Games.ToList());
             IGDBClient igdb = new IGDBClient(
@@ -35,8 +38,10 @@ namespace CICD_API.Controller
                 };
                 Database.Games.Add(dbgame);
             }
+            
             Database.SaveChanges();
-            return (new JsonResult(json));
+            
+            return await Database.Games.ToListAsync();
         }
     }
 }

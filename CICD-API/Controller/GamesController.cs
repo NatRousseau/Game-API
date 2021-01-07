@@ -1,29 +1,58 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
-// using CICD_API.Models;
-using Newtonsoft.Json;
+using System.Reflection;
+using CICD_API.Models;
 using IGDB;
-using IGDB.Models;
+using Game = IGDB.Models.Game;
 
 namespace CICD_API.Controller
 {
     [Route("api/[controller]")]
     public class GamesController : ControllerBase
     {
+        public GamesController(Micro_API_DBContext DbContext)
+        {
+            Database = DbContext;
+        }
+
+        private Micro_API_DBContext Database;
+            
+            
+        public static void MakeDto(object src, object dst)
+        {
+            FieldInfo[] dtoFields = dst.GetType().GetFields();
+
+            foreach (FieldInfo field in src.GetType().GetFields())
+            {
+                FieldInfo f = dtoFields.FirstOrDefault(i => i.Name.ToLower() == field.Name.ToLower());
+
+                if (f != null)
+                {
+                    f.SetValue(dst, field.GetValue(src));
+                }
+            }
+        }
         
         // GET
         [HttpGet]
         public IActionResult Index()
         {
+            Database.Games.RemoveRange(Database.Games.ToList());
             var igdb = new IGDBClient(
-                // Found in Twitch Developer portal for your app
-                Environment.GetEnvironmentVariable("guzm7eym3d3ecodc2b66poy0r5k3tj"),
-                Environment.GetEnvironmentVariable("h702ugu6054gv4kkyi5aqyadj1srpn")
+                "guzm7eym3d3ecodc2b66poy0r5k3tj",
+                "h702ugu6054gv4kkyi5aqyadj1srpn"
             );
-            var json = igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id,name; where id = 4;").Result;
+            Game[] json = igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id,name,summary; where category = 0 & status = 0; sort rating desc; limit 20;").Result;
+            foreach (var game in json)
+            {
+                CICD_API.Models.Game dbgame = new CICD_API.Models.Game
+                {
+                    name = game.Name,
+                    summary = game.Summary
+                };
+                Database.Games.Add(dbgame);
+            }
+            Database.SaveChanges();
             // var game = games.First();
            // string json =  System.IO.File.ReadAllText("data.json");
            // List<Game> games =  JsonConvert.DeserializeObject<List<Game>>(json);

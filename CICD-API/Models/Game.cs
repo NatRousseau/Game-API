@@ -9,14 +9,8 @@ namespace CICD_API.Models
     public partial class Game
     {
         [Key] // def Primary Key (id)
-        public int Id { get; set; }
-        public string Titre { get; set; }
-        public string Genre { get; set; }
-        public string Categorie { get; set; }
-        public string Stock { get; set; }
-        public string Prix { get; set; }
-        public string Collector { get; set; }
-        public string Editeur { get; set; }
-        public int? Quantite { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string summary { get; set; }
     }
 }

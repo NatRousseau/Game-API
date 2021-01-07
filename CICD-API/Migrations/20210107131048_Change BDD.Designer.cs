@@ -3,14 +3,16 @@ using CICD_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CICD_API.Migrations
 {
     [DbContext(typeof(Micro_API_DBContext))]
-    partial class Micro_API_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210107131048_Change BDD")]
+    partial class ChangeBDD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

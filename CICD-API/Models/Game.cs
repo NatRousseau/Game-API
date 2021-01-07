@@ -9,8 +9,10 @@ namespace CICD_API.Models
     public partial class Game
     {
         [Key] // def Primary Key (id)
-        public int id { get; set; }
-        public string name { get; set; }
-        public string summary { get; set; }
+        public int Id { get; set; }
+        public string GameName { get; set; }
+        public string GameSummary { get; set; }
+        
+        public ICollection<GameCollection> GameCollection { get; set; }
     }
 }

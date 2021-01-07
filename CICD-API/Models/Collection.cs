@@ -1,13 +1,16 @@
-﻿namespace CICD_API.Entity
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CICD_API.Models
 {
-    public class Collection
+    [Table("Collection")]
+    public partial class Collection
     {
-        public int Id { get; set; }
-        
+        [Key] 
+        public int CollectionId { get; set; }
         public int IdUser { get; set; }
-        
-        public string Name { get; set; }
-        
-        public object GameList { get; set; }
+        public string CollectionName { get; set; }
+        public ICollection<GameCollection> GameCollection { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Get Request",
+			"name": "Get Games",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -26,13 +26,73 @@
 			"response": []
 		},
 		{
-			"name": "Post Request",
+			"name": "Get Collections",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiIzMzc5ODJiOC01NzY4LTQyMDYtOTFkOS1lZmRkZWVjM2NmOGYiLCJpYXQiOiIwNy8wMS8yMDIxIDE3OjQzOjEyIiwiSWQiOiIxIiwiRmlyc3ROYW1lIjoiVGVzdCIsIkxhc3ROYW1lIjoiTldTIiwiVXNlck5hbWUiOiJUZXN0TldTIiwiRW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTYxMDEyNzc5MiwiaXNzIjoiQXV0aGVudGljYXRpb25TZXJ2ZXIiLCJhdWQiOiJTZXJ2aWNlUG9zdG1hbkNsaWVudCJ9.whbGzWYBt4L83YD1b2QbKbdiSgUGe8ps14j4CQthQ1k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/collections",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"test@gmail.com\",\r\n    \"Password\": \"$2y$10$IH/.f4CEM4ZqyMZ.XqYmKOhfdLawzAW34IeOLkzVCzx3toUsE3PFi\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Collection",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Star Citizen\",\r\n    \"genre\": \"MMO\"\r\n}",
+					"raw": "{\r\n    \"IdUser\": \"1\",\r\n    \"CollectionName\": \"Coucou\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +100,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/games",
+					"raw": "https://localhost:5001/api/collections",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -48,20 +108,20 @@
 					"port": "5001",
 					"path": [
 						"api",
-						"games"
+						"collections"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Put Request",
+			"name": "Put Collection",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Star Citizen\",\r\n    \"genre\": \"Best Game Ever\"\r\n}",
+					"raw": "{\r\n    \"collectionId\": 4,\r\n    \"IdUser\": \"1\",\r\n    \"CollectionName\": \"Coucou\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,7 +129,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/games",
+					"raw": "https://localhost:5001/api/collections",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -77,20 +137,20 @@
 					"port": "5001",
 					"path": [
 						"api",
-						"games"
+						"collections"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete Request",
+			"name": "Delete Collection",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 5\r\n}",
+					"raw": "{\r\n    \"collectionId\": 5\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,7 +158,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/games",
+					"raw": "https://localhost:5001/api/collections",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -106,12 +166,11 @@
 					"port": "5001",
 					"path": [
 						"api",
-						"games"
+						"collections"
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
